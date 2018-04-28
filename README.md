@@ -7,15 +7,17 @@ scriptPubKey: OP_DUP OP_HASH160 <pubKeyHash(20Byte)> OP_EQUALVERIFY OP_CHECKSIG
 scriptSig: <sig> <pubKey(65Byte)>
 
 -----     prev_tx          tx
+
 txin:                     scriptSig
+
 txout:    scriptPubKey
 
 script=scriptSig+scriptPubKey
       =<sig> <pubKey(65Byte)> OP_DUP OP_HASH160 <pubKeyLen(1Byte)> <pubKeyHash(20Byte)> OP_EQUALVERIFY OP_CHECKSIG
+
 the script run from empty stack and execute by order
 
 
-##
 > 76       A9             14
 > OP_DUP OP_HASH160    Bytes to push
 > 
@@ -26,6 +28,7 @@ the script run from empty stack and execute by order
 2.redeem_public_key_input.py
 
 scriptPubKey: <pubKey> OP_CHECKSIG
+
 scriptSig: <sig>
 
 
