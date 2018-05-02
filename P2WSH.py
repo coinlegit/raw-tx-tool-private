@@ -1,6 +1,6 @@
 ########################
-#pay to witness_v0_keyhash
-#redeem by witness program
+#P2WSH segwit example
+#
 #Double SHA256 of the serialization of:
 #^     1. nVersion of the transaction (4-byte little endian)
 #      2. hashPrevouts (32-byte hash)

@@ -1,5 +1,6 @@
 ########################
-#P2SH_WPKH
+#P2SH_WPKH segwit example
+#
 #Double SHA256 of the serialization of:
 #^     1. nVersion of the transaction (4-byte little endian)
 #      2. hashPrevouts (32-byte hash)
