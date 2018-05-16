@@ -56,3 +56,59 @@ decoderawtransaction 02000000010f368918b0b4d16cabbe878faf91e7b0832168bb4179844c1
 
 ```
 
+the redeem tx is below,is show me 「Attempted to use a disabled opcode」, but I can also to sign and propagate it.
+[00969919204d288b68c846f06850baa9b02d365a7e8f9a262141cc099d05cd6f](http://35.184.152.173:3001/insight/tx/00969919204d288b68c846f06850baa9b02d365a7e8f9a262141cc099d05cd6f)
+
+```
+signrawtransaction "020000000147ea5c42b178651489f0513543331991caa85674e0cdd43560a6396ce669c2cf0000000000ffffffff01d03590410000000017a9142b718e29f493a57fc06720dce2d850aa362da4a48700000000" "[{\"txid\":\"cfc269e66c39a66035d4cde07456a8ca911933433551f089146578b1425cea47\",\"vout\":0,\"scriptPubKey\":\"5151865186518651865186518651865186518651865186518651865186518651865186518651865186518651865186518651865186518651865186518651865186\",\"redeemScript\":\"\",\"amount\":10.9997}]"
+{
+  "hex": "020000000147ea5c42b178651489f0513543331991caa85674e0cdd43560a6396ce669c2cf0000000000ffffffff01d03590410000000017a9142b718e29f493a57fc06720dce2d850aa362da4a48700000000",
+  "complete": false,
+  "errors": [
+    {
+      "txid": "cfc269e66c39a66035d4cde07456a8ca911933433551f089146578b1425cea47",
+      "vout": 0,
+      "scriptSig": "",
+      "sequence": 4294967295,
+      "error": "Attempted to use a disabled opcode"
+    }
+  ]
+}
+
+decoderawtransaction 020000000147ea5c42b178651489f0513543331991caa85674e0cdd43560a6396ce669c2cf0000000000ffffffff01d03590410000000017a9142b718e29f493a57fc06720dce2d850aa362da4a48700000000
+{
+  "txid": "00969919204d288b68c846f06850baa9b02d365a7e8f9a262141cc099d05cd6f",
+  "hash": "00969919204d288b68c846f06850baa9b02d365a7e8f9a262141cc099d05cd6f",
+  "size": 83,
+  "version": 2,
+  "locktime": 0,
+  "vin": [
+    {
+      "txid": "cfc269e66c39a66035d4cde07456a8ca911933433551f089146578b1425cea47",
+      "vout": 0,
+      "scriptSig": {
+        "asm": "",
+        "hex": ""
+      },
+      "sequence": 4294967295
+    }
+  ],
+  "vout": [
+    {
+      "value": 10.99970000,
+      "n": 0,
+      "scriptPubKey": {
+        "asm": "OP_HASH160 2b718e29f493a57fc06720dce2d850aa362da4a4 OP_EQUAL",
+        "hex": "a9142b718e29f493a57fc06720dce2d850aa362da4a487",
+        "reqSigs": 1,
+        "type": "scripthash",
+        "addresses": [
+          "bchtest:pq4hrr3f7jf62l7qvusdeckc2z4rvtdy5sxycpvxrg"
+        ]
+      }
+    }
+  ]
+}
+sendrawtransaction 020000000147ea5c42b178651489f0513543331991caa85674e0cdd43560a6396ce669c2cf0000000000ffffffff01d03590410000000017a9142b718e29f493a57fc06720dce2d850aa362da4a48700000000
+00969919204d288b68c846f06850baa9b02d365a7e8f9a262141cc099d05cd6f
+```
