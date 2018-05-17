@@ -3,7 +3,7 @@
 <pre>
 when sign tx use bitcoin-abc daemon with incorrect redeem_amount,
 the bitcoin-cli show 「16: mandatory-script-verify-flag-failed (Signature must be zero for failed CHECK(MULTI)SIG operation)」,
-means signature is wrong, because bitcoin-abc signrawtransaction need correc amount field.
+means signature is wrong, because bitcoin-abc signrawtransaction need correct amount field.
 you can produce from below code.
 </pre>
 
