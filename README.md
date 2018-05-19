@@ -48,3 +48,9 @@ scriptSig: <sig>
 ## dependency
 https://github.com/warner/python-ecdsa
 
+## reference
+https://github.com/bitcoin/bips/blob/master/bip-0143.mediawiki#specification
+https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki#witness-program
+https://github.com/bitcoin/bips/blob/master/bip-0142.mediawiki#witness-program
+
+
