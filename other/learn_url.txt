@@ -1,0 +1,2 @@
+https://www.yours.org/content/use-cases-for-re-enabled-op-codes-8b150b6a0deb
+https://github.com/bitcoincashorg/bitcoincash.org/tree/master/spec
