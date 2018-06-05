@@ -1,43 +1,77 @@
 # raw-tx-tool
 some tips for create raw tx from script
+bitcoinのトランザクションを理解するため幾つかのTXの基本の内容を紹介する。
+詳細のTXの署名の過程と方法をpythonスクリプトで実装する。
 
-
-1.redeem_pub_key_hash_input.py
+1.bitcoinの基本スクリプト
 <pre>
-scriptPubKey: OP_DUP OP_HASH160 ＜pubKeyHash(20Byte)＞ OP_EQUALVERIFY OP_CHECKSIG
-scriptSig: ＜sig＞ ＜pubKey(65Byte)＞
+
+OP_CODE             HEX
+------------------------
+OP_DUP              76
+OP_HASH160          a9
+OP_EQUALVERIFY      88
+OP_CHECKSIG         ac
+OP_EQUAL            87
+
+[1]P2PKH #################################
+scriptSig:    <signature> <pubkey>
+scriptPubKey: 76 a9 14 <20-byte-key-hash> 88 CHECKSIG
+
+check-sig-operation
+1)hash160(scriptSig.<pubkey>)=scriptPubKey.<20-byte-pubkey-hash>
+2)<scriptSig> <scriptPubKey>
+
+[2]P2SH-P2WPKH##############################
+witness:     <signature> <pubkey>
+scriptSig:   <0 <20-byte-pubkey-hash>>
+             (0x160014{20-byte-pubkey-hash})
+scriptPubKey: HASH_160 <20-byte-script-hash> EQUAL
+
+check-sig-operation
+1)hash160(scriptSig)=scriptPubKey.<20-byte-script-hash>
+2)witness.size=2
+3)<signature> <pubkey> CHECKSIG
+
+[3]P2WPKH #################################
+P2WSH nested in BIP16 P2SH
+
+witness:      <signature> <pubkey>
+scriptSig:    (empty)
+scriptPubKey: 00 <20-byte-pubkey-hash>
+              (0x0014{20-byte-pubkey-hash})
+                     {20byte = P2WPKH witness program}
+
+check-sig-operation
+1)hash160(witness.<pubkey>)=<20-byte-pubkey-hash>
+2)witness.size=2
+3)<signature> <pubkey> CHECKSIG
+
+
+[4]P2SH-P2WSH##############################
+witness:     0 <signature1> <1 <pubkey1> <pubkey2> 2 CHECKMULTISIG>
+scriptSig:  <0 <32-byte-hash>>
+            (0x220020{32-byte-hash})
+scriptPubKey: HASH160 <20-byte-hash> EQUAL
+             (HASH_160 14{20-byte-hash} EQUAL)
+
+check-sig-operation
+1)hash160(scriptSig)=scriptPubKey.<20-byte-hash>
+2)0 <signature1> 1 <pubkey1> <pubkey2> 2 CHECKMULTISIG
+
+[5]P2WSH##############################
+witness:     0 <signature1> <1 <pubkey1> <pubkey2> 2 CHECKMULTISIG>
+scriptSig:  (empty) 
+scriptPubKey: 0 <32-byte-hash>
+             (0x0020{32-byte-hash})
+
+check-sig-operation
+1)sha256(witness.<1 <pubkey1> <pubkey2> 2 CHECKMULTISIG>)=scriptPubKey.<32-byte-hash>
+2)0 <signature1> 1 <pubkey1> <pubkey2> 2 CHECKMULTISIG
+
 </pre>
 
-<pre>
-          prev_tx          tx
-txin:                     scriptSig
-txout:    scriptPubKey
-</pre>
-
-<pre>
-script=scriptSig+scriptPubKey
-      =＜sig＞ ＜pubKey(65Byte)＞ OP_DUP OP_HASH160 ＜pubKeyLen(1Byte)＞ ＜pubKeyHash(20Byte)＞ OP_EQUALVERIFY OP_CHECKSIG
-the script run from empty stack and execute by order
-</pre>
-
-<pre>
- 76       A9             14
- OP_DUP OP_HASH160    Bytes to push
- 89 AB CD EF AB BA AB BA AB BA AB BA AB BA AB BA AB BA AB BA         88            AC
-                       Data to push                            OP_EQUALVERIFY  OP_CHECKSIG
-</pre>
-
-2.redeem_public_key_input.py
-<pre>
-scriptPubKey: <pubKey> OP_CHECKSIG
-scriptSig: <sig>
-</pre>
-
-3.redeem_segwit_input.py
-
-
-4.segwit tx check example
-
+2.segwit tx check example
 [there is a btc testnet segwitoutput txid=56f87210814c8baef7068454e517a70da2f2103fc3ac7f687e32a228dc80e115](https://chain.so/tx/BTCTEST/56f87210814c8baef7068454e517a70da2f2103fc3ac7f687e32a228dc80e115)
 
  1. [native-P2WPKH:txid=d869f854e1f8788bcff294cc83b280942a8c728de71eb709a2c29d10bfe21b7c](https://chain.so/tx/BTCTEST/d869f854e1f8788bcff294cc83b280942a8c728de71eb709a2c29d10bfe21b7c)
@@ -52,5 +86,4 @@ https://github.com/warner/python-ecdsa
 https://github.com/bitcoin/bips/blob/master/bip-0143.mediawiki#specification
 https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki#witness-program
 https://github.com/bitcoin/bips/blob/master/bip-0142.mediawiki#witness-program
-
 
