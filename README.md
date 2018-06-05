@@ -1,8 +1,9 @@
 # raw-tx-tool
+<pre>
 some tips for create raw tx from script
 bitcoinのトランザクションを理解するため幾つかのTXの基本の内容を紹介する。
 詳細のTXの署名の過程と方法をpythonスクリプトで実装する。
-
+</pre>
 1.bitcoinの基本スクリプト
 <pre>
 
