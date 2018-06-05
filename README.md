@@ -72,10 +72,8 @@ check-sig-operation
 
 </pre>
 
-2.segwit tx check example
-
-[there is a btc testnet segwitoutput txid=56f87210814c8baef7068454e517a70da2f2103fc3ac7f687e32a228dc80e115](https://chain.so/tx/BTCTEST/56f87210814c8baef7068454e517a70da2f2103fc3ac7f687e32a228dc80e115)
-
+2.segwit tx check example<br />
+[there is a btc testnet segwitoutput txid=56f87210814c8baef7068454e517a70da2f2103fc3ac7f687e32a228dc80e115](https://chain.so/tx/BTCTEST/56f87210814c8baef7068454e517a70da2f2103fc3ac7f687e32a228dc80e115)<br />
  1. [native-P2WPKH:txid=d869f854e1f8788bcff294cc83b280942a8c728de71eb709a2c29d10bfe21b7c](https://chain.so/tx/BTCTEST/d869f854e1f8788bcff294cc83b280942a8c728de71eb709a2c29d10bfe21b7c)
  2. [native-P2WSH:txid=78457666f82c28aa37b74b506745a7c7684dc7842a52a457b09f09446721e11c](https://chain.so/tx/BTCTEST/78457666f82c28aa37b74b506745a7c7684dc7842a52a457b09f09446721e11c)
  3. [P2SH-WPKH:txid=8139979112e894a14f8370438a471d23984061ff83a9eba0bc7a34433327ec21](https://chain.so/tx/BTCTEST/8139979112e894a14f8370438a471d23984061ff83a9eba0bc7a34433327ec21)
@@ -89,3 +87,5 @@ https://github.com/bitcoin/bips/blob/master/bip-0143.mediawiki#specification
 https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki#witness-program
 https://github.com/bitcoin/bips/blob/master/bip-0142.mediawiki#witness-program
 
+## how to run script
+製作中
