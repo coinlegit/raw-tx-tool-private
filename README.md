@@ -73,6 +73,7 @@ check-sig-operation
 </pre>
 
 2.segwit tx check example
+
 [there is a btc testnet segwitoutput txid=56f87210814c8baef7068454e517a70da2f2103fc3ac7f687e32a228dc80e115](https://chain.so/tx/BTCTEST/56f87210814c8baef7068454e517a70da2f2103fc3ac7f687e32a228dc80e115)
 
  1. [native-P2WPKH:txid=d869f854e1f8788bcff294cc83b280942a8c728de71eb709a2c29d10bfe21b7c](https://chain.so/tx/BTCTEST/d869f854e1f8788bcff294cc83b280942a8c728de71eb709a2c29d10bfe21b7c)
