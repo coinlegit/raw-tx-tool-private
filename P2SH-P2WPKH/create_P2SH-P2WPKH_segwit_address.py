@@ -2,17 +2,11 @@ from hash_util import ripemd160,hash160,hash256,dhash256
 from base58    import b58encode,b58encode_check,b58decode
 
 #create p2sh-p2wpkh segwit address step by step
-#hash160=ripemd160(hash256(input))
-#Public key - compressed:
-#03fac6879502c4c939cfaadc45999c7ed7366203ad523ab83ad5502c71621a85bb
-
-#wif priv key
-##L5mHKZsCLS27nSoGM3RdAwuxjvg7XhJdP25LgqdXe6zF11wpWdbT
 #compress pub key
-#03fac6879502c4c939cfaadc45999c7ed7366203ad523ab83ad5502c71621a85bb
+#02abe2287695c990eecb6f64f23eb47fac27d0953957887b42ae7ba4905273ebc2
 
 #1 Calculate the RIPEMD160 of the SHA256 of a public key
-data='03fac6879502c4c939cfaadc45999c7ed7366203ad523ab83ad5502c71621a85bb'
+data='02abe2287695c990eecb6f64f23eb47fac27d0953957887b42ae7ba4905273ebc2'
 data=hash160(data.decode('hex')).encode('hex')
 #print data
 #2 Create P2SH redeemScript as OP_PUSH publicKeyHash
@@ -36,5 +30,5 @@ addressHash=data+checksum
 address= b58encode(addressHash.decode('hex'))
 print address
 
-#33voQqbNAYyig272KjcX8GkucWn2x25WEg
+#2MsfZkQnEbsAYjTZa3PgB8SW7XRTdurVj8L
 
