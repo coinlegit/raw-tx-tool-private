@@ -1,0 +1,94 @@
+#https://live.blockcypher.com/btc-testnet/tx/0b2c1fde1a29ad60ec3fdc1455741f880d31943205f1e5236605fa4620c5cb42/
+##pay-to-native-segwit-pubkey-hash
+#witness_v0_keyhash output
+
+
+output 0 [scriptPubKey] : OP_HASH160 e928cc1b9379ce4ce30f24b824c69a024924a1f7 OP_EQUAL
+input  0 [scriptSig]    : 
+     "scriptSig": {
+        "asm": "0014c712299cbd34980b0d6b2dee8fe9a11fa816999e",
+        "hex": "160014c712299cbd34980b0d6b2dee8fe9a11fa816999e"
+      },
+      "txinwitness": [
+        "30450221009d8c2e9b0260437eb2ab50632d567f6aa72270e3ce182a806f2a6979acf0d6940220272a0ffe4c08c9f11c3033f88b254dea7c150b516910c4390f4c9895905925f901",
+        "03302537fa9e3648ddbae25c068714c842b2540a1e9a5b3e38c628ba7471d33fa4"
+      ],
+
+
+bash cli.bash  getaddressinfo 2NEW4JdGwecPiaSMU84gMmmg7NwwNDADmZj
+{
+  "address": "2NEW4JdGwecPiaSMU84gMmmg7NwwNDADmZj",                    //pay to this address P2SH-P2SPKH
+  "scriptPubKey": "a914e928cc1b9379ce4ce30f24b824c69a024924a1f787",    //pay to scriptPubKey=hash160(embedded.scriptPubKey) 
+  "ismine": true,
+  "iswatchonly": false,
+  "isscript": true,
+  "iswitness": false,
+  "script": "witness_v0_keyhash",
+  "hex": "0014c712299cbd34980b0d6b2dee8fe9a11fa816999e",              
+  "pubkey": "03302537fa9e3648ddbae25c068714c842b2540a1e9a5b3e38c628ba7471d33fa4",
+  "embedded": {
+    "isscript": false,
+    "iswitness": true,
+    "witness_version": 0,
+    "witness_program": "c712299cbd34980b0d6b2dee8fe9a11fa816999e",
+    "pubkey": "03302537fa9e3648ddbae25c068714c842b2540a1e9a5b3e38c628ba7471d33fa4",
+    "address": "tb1qcufzn89axjvqkrtt9hhgl6dpr75pdxv7gkxmn8",
+    "scriptPubKey": "0014c712299cbd34980b0d6b2dee8fe9a11fa816999e"    //embedded.scriptPubKey=hash160(pubkey), when pay to this scriptPubkey means native-P2WPKH witness_v0_keyhash
+  },
+  "label": "\"\"",
+  "timestamp": 1528290018,
+  "hdkeypath": "m/0'/0'/12'",
+  "hdseedid": "94a45e17cb46272e4d39e06ec00fc38c729b160a",
+  "hdmasterkeyid": "94a45e17cb46272e4d39e06ec00fc38c729b160a",
+  "labels": [
+    {
+      "name": "\"\"",
+      "purpose": "receive"
+    }
+  ]
+}
+
+decoderawtransaction
+0200000000010142cbc52046fa056623e5f1053294310d881f745514dc3fec60ad291ade1f2c0b0000000000ffffffff01502fbf07000000001976a914ecebae831bbfbd7827542a82da4dc136e1288f7188ac02483045022100dab3cde00a3cf2c2d41c43514ab05a781a845976918da0d3a50050bc8e135c1d0220708e84985d01b3c09b4be0e8c58476610e3cb8a528cae693fae7e3f4ff32ac32012103302537fa9e3648ddbae25c068714c842b2540a1e9a5b3e38c628ba7471d33fa400000000
+
+{
+  "txid": "0f30985f2dd42075f6fd4e4d8dc851f6aeabc71d0e9b4811e9df40f4beb8c429",
+  "hash": "f5775e0b77b63e49f52339533bcd0461db887ee32ee131e382d2c4a5dc12187a",
+  "version": 2,
+  "size": 195,
+  "vsize": 113,
+  "weight": 450,
+  "locktime": 0,
+  "vin": [
+    {
+      "txid": "0b2c1fde1a29ad60ec3fdc1455741f880d31943205f1e5236605fa4620c5cb42",
+      "vout": 0,
+      "scriptSig": {
+        "asm": "",
+        "hex": ""
+      },
+      "txinwitness": [
+        "3045022100dab3cde00a3cf2c2d41c43514ab05a781a845976918da0d3a50050bc8e135c1d0220708e84985d01b3c09b4be0e8c58476610e3cb8a528cae693fae7e3f4ff32ac3201",
+        "03302537fa9e3648ddbae25c068714c842b2540a1e9a5b3e38c628ba7471d33fa4"
+      ],
+      "sequence": 4294967295
+    }
+  ],
+  "vout": [
+    {
+      "value": 1.29970000,
+      "n": 0,
+      "scriptPubKey": {
+        "asm": "OP_DUP OP_HASH160 ecebae831bbfbd7827542a82da4dc136e1288f71 OP_EQUALVERIFY OP_CHECKSIG",
+        "hex": "76a914ecebae831bbfbd7827542a82da4dc136e1288f7188ac",
+        "reqSigs": 1,
+        "type": "pubkeyhash",
+        "addresses": [
+          "n37g6n1JEsCGb9ctfoHT6epv8znnhtP522"
+        ]
+      }
+    }
+  ]
+}
+
+https://live.blockcypher.com/btc-testnet/tx/0f30985f2dd42075f6fd4e4d8dc851f6aeabc71d0e9b4811e9df40f4beb8c429/

@@ -1,0 +1,46 @@
+#https://chain.so/tx/BTCTEST/7b9992360c3b42493a075602751ca67b04a9ee538234115cfd62bbaf03f29742
+##pay-to-pubkey
+
+
+output 0 [scriptPubKey] : 02d7c9e36a4d31039d4b94a43246a4a5f0767f2f55ef9a359901c82c41fb1e4bff OP_CHECKSIG
+input  0 [scriptSig]    : 304302204c349b727d26b80a793a4e2c050a0969b2a73305df7af4bd94d0e2e58842263b021f1ee18678d21416992c4bb098df5fc3b5328361217d8bf37aa74feb67b7be0901
+
+decoderawtransaction  02000000014297f203afbb62fd5c11348253eea9047ba61c750256073a49423b0c3692997b000000004746304302204c349b727d26b80a793a4e2c050a0969b2a73305df7af4bd94d0e2e58842263b021f1ee18678d21416992c4bb098df5fc3b02fbf07000000001976a914ecebae831bbfbd7827542a82da4dc136e1288f7188ac00000000
+{
+  "txid": "12fe56c9ef0720504b2125646671d752995723e014b5973880ff0c76b01d4370",
+  "hash": "12fe56c9ef0720504b2125646671d752995723e014b5973880ff0c76b01d4370",
+  "version": 2,
+  "size": 156,
+  "vsize": 156,
+  "weight": 624,
+  "locktime": 0,
+  "vin": [
+    {
+      "txid": "7b9992360c3b42493a075602751ca67b04a9ee538234115cfd62bbaf03f29742",
+      "vout": 0,
+      "scriptSig": {
+        "asm": "304302204c349b727d26b80a793a4e2c050a0969b2a73305df7af4bd94d0e2e58842263b021f1ee18678d21416992c4bb098df5fc3b5328361217d8bf37aa74feb67b7be09[ALL]",
+        "hex": "46304302204c349b727d26b80a793a4e2c050a0969b2a73305df7af4bd94d0e2e58842263b021f1ee18678d21416992c4bb098df5fc3b5328361217d8bf37aa74feb67b7be0901"
+      },
+      "sequence": 4294967295
+    }
+  ],
+  "vout": [
+    {
+      "value": 1.29970000,
+      "n": 0,
+      "scriptPubKey": {
+        "asm": "OP_DUP OP_HASH160 ecebae831bbfbd7827542a82da4dc136e1288f71 OP_EQUALVERIFY OP_CHECKSIG",
+        "hex": "76a914ecebae831bbfbd7827542a82da4dc136e1288f7188ac",
+        "reqSigs": 1,
+        "type": "pubkeyhash",
+        "addresses": [
+          "n37g6n1JEsCGb9ctfoHT6epv8znnhtP522"
+        ]
+      }
+    }
+  ]
+}
+
+#https://live.blockcypher.com/btc-testnet/tx/12fe56c9ef0720504b2125646671d752995723e014b5973880ff0c76b01d4370/
+
