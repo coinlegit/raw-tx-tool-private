@@ -21,6 +21,7 @@ from  ecdsa.util import sigencode_der, sigencode_der_canonize, sigencode_strings
 from  ecdsa.util import sigdecode_der, sigdecode_strings
 from  ecdsa import SigningKey, NIST256p, SECP256k1
 from hash_util import hash256,dhash256,get_len_hex,formatamount,hash160,reverse_byte_order
+from key import wif_2_privkey
 
 __unit=100000000
 sig_hash_all='01000000'
@@ -35,9 +36,9 @@ segwit_flag='01'
 
 #txins
 n_inputs='01'
-hash_inputs='56f87210814c8baef7068454e517a70da2f2103fc3ac7f687e32a228dc80e115'
+hash_inputs='b9c0b0bee666eb3b53ea501271c168da9a6a0527b66bfc87d8f1cbc5b1d7a2de'
 hash_inputs=reverse_byte_order(hash_inputs)
-nth_inputs='03000000'
+nth_inputs='00000000'
 outpoint=hash_inputs+nth_inputs
 #hash outpoint=prev_tx_id+nth
 hashPrevouts=dhash256(outpoint.decode('hex')).encode('hex')
@@ -48,27 +49,24 @@ hashSequence=dhash256(sequence.decode('hex')).encode('hex')
 
 #txouts
 n_outputs='01'
-amount=0.99987100
+amount=1.2999
 amount_satoshi=long(round(float(amount*__unit)))
 amount=formatamount(amount_satoshi)
 #print output_amount
-pay_to_hash='1976a914'+'1d7cd6c75c2e86f4cbf98eaed221b30bd9a0b928'+'88ac'
+pay_to_hash='1976a914'+'ecebae831bbfbd7827542a82da4dc136e1288f71'+'88ac'
 outputs=amount+pay_to_hash
 #amount+dest_script
 hashOutputs=dhash256(outputs.decode('hex')).encode('hex')
 
+priv_key='cQuzMWdzbJezujAaAiMNq4Gr6zcFZt7BeD2VGUEN3LYBzZYgipRF'
+priv_key=wif_2_privkey(priv_key)
 
-priv_key='1acbf0d00b0e6dbbe4910d07e4f9ab617e2fedd716df850bad0513c4f1e4af06'
-#redeem_public_key_hash='1d7cd6c75c2e86f4cbf98eaed221b30bd9a0b928'
-#scriptCode='17160014'+redeem_public_key_hash
-
-#redeem_public_key_hash='901c8694c03fafd5522810e0330f26e67a8533cd'
+redeem_public_key_hash='c712299cbd34980b0d6b2dee8fe9a11fa816999e'
+scriptCode='17160014'+redeem_public_key_hash
+#scriptCode='1976a914'+redeem_public_key_hash+'88ac'
 #scriptCode='17a914'+redeem_public_key_hash+'87'
 
-redeem_public_key_hash='1d7cd6c75c2e86f4cbf98eaed221b30bd9a0b928'
-scriptCode='1976a914'+redeem_public_key_hash+'88ac'
-
-redeem_amount=1.00000000
+redeem_amount=1.3
 print "n_version   :",           n_version
 print "hashPrevouts:",           hashPrevouts
 print "hashSequence:",           hashSequence
@@ -102,21 +100,13 @@ signature=p_len + signature
 
 #print signature
 
-#redeem_public_key='001463b379dbf69f2ae27a96dba7418616c2d35faa15'
-redeem_public_key='038262a6c6cec93c2d3ecd6c6072efea86d02ff8e3328bbd0242b20af3425990ac'
+redeem_public_key='03302537fa9e3648ddbae25c068714c842b2540a1e9a5b3e38c628ba7471d33fa4'
 p_len=(len(redeem_public_key))/2
 p_len=hex(p_len).lstrip('0x')
 redeem_public_key=p_len+redeem_public_key
 witness_02='02'
 
-#n_locktime
-#n_locktime='92040000'
-
-#redeem_public_key_hash=scriptCode
-redeem_public_key_hash='17160014'+redeem_public_key_hash
-#print redeem_public_key_hash[2:4]
-#if redeem_public_key_hash[4:6] == '00':
-#    redeem_public_key_hash='00'
+redeem_public_key_hash=script_code
 
 #print n_version
 #print segwit_marker

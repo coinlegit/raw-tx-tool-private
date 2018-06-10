@@ -15,9 +15,18 @@ OP_EQUALVERIFY      88
 OP_CHECKSIG         ac
 OP_EQUAL            87
 
+[0]P2PK #################################
+#pay to public key
+#これは一番最初に使われるらしい
+scriptSig:    ＜signature＞
+scriptPubKey: ＜pubkey＞OP_CHECKSIG
+
+check-sig-operation
+1) ＜signature＞ ＜pubkey＞ OP_CHECKSIG
+
 [1]P2PKH #################################
 scriptSig:    ＜signature＞ ＜pubkey＞
-scriptPubKey: 76 a9 14 ＜20-byte-key-hash＞ 88 CHECKSIG
+scriptPubKey: OP_DUP OP_HASH_160 14 ＜20-byte-key-hash＞ OP_EQUALVERIFY CHECKSIG
 
 check-sig-operation
 1)hash160(scriptSig.＜pubkey＞)=scriptPubKey.＜20-byte-pubkey-hash＞
