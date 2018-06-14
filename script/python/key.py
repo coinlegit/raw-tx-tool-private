@@ -1,7 +1,6 @@
 from base58 import b58decode
 def wif_2_privkey(wif):
      decoded=b58decode(wif)
-     print decoded.encode('hex')
      key_hash=decoded[0:-4]
      check_sum=decoded[-4:]
      if len(key_hash) == 34:

@@ -17,7 +17,7 @@ input  0 [scriptSig]    :
 
 bash cli.bash  getaddressinfo 2NEW4JdGwecPiaSMU84gMmmg7NwwNDADmZj
 {
-  "address": "2NEW4JdGwecPiaSMU84gMmmg7NwwNDADmZj",                    //pay to this address P2SH-P2SPKH
+  "address": "2NEW4JdGwecPiaSMU84gMmmg7NwwNDADmZj",                    //pay to this address P2SH-P2WPKH
   "scriptPubKey": "a914e928cc1b9379ce4ce30f24b824c69a024924a1f787",    //pay to scriptPubKey=hash160(embedded.scriptPubKey) 
   "ismine": true,
   "iswatchonly": false,

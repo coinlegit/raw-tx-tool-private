@@ -47,9 +47,9 @@ $ bash cli.bash  decodescript 522103d1531d7a373707e3057b53462f7b66e7ded258e39a1c
     "reqSigs": 1,
     "type": "witness_v0_scripthash",
     "addresses": [
-      "tb1qkpf38yzsvmlaqq0yka55m0lzkka2ugfv9unxt3u9snngmgcvay9q9yzcn6"
+    "tb1qkpf38yzsvmlaqq0yka55m0lzkka2ugfv9unxt3u9snngmgcvay9q9yzcn6"            // pay to native segwit p2sh  hash256(redeemScript)
     ],
-    "p2sh-segwit": "2NDEP4aVZCwQffz8CrGtxrdfa7sMdhrdBur"
+    "p2sh-segwit": "2NDEP4aVZCwQffz8CrGtxrdfa7sMdhrdBur"                       //a914db39aca19a88cb8a521baad652dbfeed7ce66f0387  hash160( hash256(redeemScript) )
   }
 }
 
