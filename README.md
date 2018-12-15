@@ -97,4 +97,6 @@ https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki#witness-program
 https://github.com/bitcoin/bips/blob/master/bip-0142.mediawiki#witness-program
 
 ## how to run script
-製作中
+pip install ecdsa
+cd ./script && . export_env.bash
+
