@@ -2,15 +2,17 @@ from hash_util import ripemd160,hash160,hash256,dhash256
 from base58    import b58encode,b58encode_check,b58decode
 
 #create p2sh address
+#checkdatasig inlcuded in p2sh address
+#redeemscript= msg+publickey+0xba
 
 #1 create p2sh checkdata-sig address from below data text
 #signature
-sig_r='0220'+"2caa3f50ec00dcf2eff56bb9e14d4af2b54f0f7ecbdee576c8e5f128a50382b4"
-sig_s='0220'+"6eaa0117977269a2ba9eb5698861141681a81479e5f32e8f9bcebacc07062616"
-sig_l=len(sig_r)/2+len(sig_s)/2
-sig='30'+hex(sig_l)[2:]+sig_r+sig_s
-le=hex(len(sig)/2)
-print "sig=",sig
+#sig_r='0220'+"2caa3f50ec00dcf2eff56bb9e14d4af2b54f0f7ecbdee576c8e5f128a50382b4"
+#sig_s='0220'+"6eaa0117977269a2ba9eb5698861141681a81479e5f32e8f9bcebacc07062616"
+#sig_l=len(sig_r)/2+len(sig_s)/2
+#sig='30'+hex(sig_l)[2:]+sig_r+sig_s
+#le=hex(len(sig)/2)
+#print "sig=",sig
 
 #redeem script
 msg="0064d431be56e62f41e05a4af9dd662d4364878cce9e794ecbfcf56c311eabb68f"  #hash256('I like you yuka')

@@ -1,0 +1,36 @@
+from hash_util import ripemd160,hash160,hash256,dhash256
+from base58    import b58encode,b58encode_check,b58decode
+
+#create p2sh address
+#this is a chekckdatasig p2sh sample
+#1 OP_ADD[0x93] 01 0x63 OP_EQUAL[0x87]
+#redeemScript='46304402202caa3f50ec00dcf2eff56bb9e14d4af2b54f0f7ecbdee576c8e5f128a50382b402206eaa0117977269a2ba9eb5698861141681a81479e5f32e8f9bcebacc07062616431f48656c6c6f20776f726c64210a04001308000605025e0c518004ff0000000c2102a788d320086c086c71e15d34e62a2308240afccc2325bb34f07edf56706f62a6ba'
+#redeemScript='4ddf019901a2044909faa7110400ca0d37199580d1b4fd50eff4a1bb3049cd487d868555a30a207f65b4ed4e86f41a8a5b6e2ba623b162612b8cc15fbcdb68ccd93edf771dfecab7822d393b520c999ce0dab6c5e277b9b778a99579cdbb3361fa3fba571c40d7a18f841469aef9e783cafd19800b2d4a68f57935eca138dbd618285815bed4cfb441949693b51300a0ec59967416d1a789a7e467f140d4f5873a7d5a0903ff7a59d1c0799b87a7cdfca53875e645f24a04c174d990e7b18d46a9e1effcb8e4842bac4e9daacf8b612f271838528698075da559ccb04fd36192e0a6cc63ac9b2b10f3527685e4dc88044ada309978d37ebf7134eac1db4424d1938ed668a9396320b1ee0f988bb4d97db839aa56b7285d1ec5f7a012dcc037647bc68480087c03fb0794aedf2f5062f2b173c7a85bfb6c88943fdf6b330155951ed2bdaea3b95da84cf9f867848811628277791c786a8c9c3cad42647de641a132989432a8ed70eb4d1c5fcb336e6593f104b4e3fa4798f16818850e4c5ac482d8c5fb1591da25d7586b4a73526159990874c9dba55544272cacd14ae9ec8c63a79b1896059c1be9b4000000235361746f736869204e616b616d6f746f203c7361746f7368696e40676d782e636f6d3e04101308000605025b83907404ff0000000c2102a788d320086c086c71e15d34e62a2308240afccc2325bb34f07edf56706f62a6ba'
+
+#redeemScript='1f48656c6c6f20776f726c64210a04001308000605025e0c518004ff0000000c2102a788d320086c086c71e15d34e62a2308240afccc2325bb34f07edf56706f62a6ba'
+OP_CHECKSIG_VERIFY='ad' #0xad
+OP_1='51'               #0x51
+OP_MUL='95'             #0x95
+redeemScript=''
+
+#2 Generate scriptPubKey as OP_HASH160 hash160(redeemScript) OP_EQUAL
+data=hash160(redeemScript.decode('hex')).encode('hex')
+print data
+scriptPubKey='a914'+data+'87'
+
+version='05' #mainnet
+version='c4' #testnet
+data=version+data
+
+#print EncodeBase58Check(data.decode('hex'))
+#3 Generate address with 0x05 prefix and double SHA256 hash checksum(=4bytes)
+checksum=dhash256(data.decode('hex'))
+checksum=checksum.encode('hex')[0:8]
+addressHash=data+checksum
+
+#4 bash58encode
+address= b58encode(addressHash.decode('hex'))
+print address
+
+#2My2ApqGcoNXYceZC4d7fipBu4GodkbefHD
+

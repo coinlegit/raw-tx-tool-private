@@ -54,6 +54,8 @@ pay_to_hash='17'+'a914'+'3f58b4f7b14847a9083694b9b3b52a4cea2569ed'+'87'
 
 redeem_amount=1.288
 redeemScript='93016387'
+#これはとても簡単なP2SHのサンプル
+#[OP_TRUE] 01 [62] 04 [93016387]
 # ? + ? = 99
 #OP_ADD   93
 #0x63     99
