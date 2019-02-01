@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import Crypto.Hash.SHA256 as sha256
-import hashlib
+#import Crypto.Hash.SHA256 as sha256
+#import hashlib
 
 
 # specs for Bitcoin's curve - the secp256k1
@@ -147,4 +147,68 @@ def GetUncompressedkey(compressed_key):
     if y % 2 != y_parity:
         y = -y % P
     return (x, y)
+
+def ParseElement(hex_str, offset, element_size):
+    """
+    :param hex_str: string to parse the element from.
+    :type hex_str: hex str
+    :param offset: initial position of the object inside the hex_str.
+    :type offset: int
+    :param element_size: size of the element to extract.
+    :type element_size: int
+    :return: The extracted element from the provided string, and the updated offset after extracting it.
+    :rtype tuple(str, int)
+    """
+
+    return hex_str[offset:offset+element_size], offset+element_size
+'''
+DER ASN1-encoding
+
+    30     len(z)     02     len(r)     r        02      len(s)    s     hashtype
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+     1       1         1        1      32-33      1        1      32-33     1
+
+30
+44
+02
+20 32/33bytes
+02
+20 32/33bytes
+01
+'''
+def ParseSignature(hex_sig):
+    """
+    Extracts the r, s and ht components from a Bitcoin ECDSA signature.
+    :param hex_sig: Signature in  hex format.
+    :type hex_sig: hex str
+    :return: r, s, t as a tuple.
+    :rtype: tuple(str, str, str)
+    """
+
+    offset = 0
+    # Check the sig contains at least the size and sequence marker
+    assert len(hex_sig) > 4, "Wrong signature format."
+    sequence, offset = ParseElement(hex_sig, offset, 2)
+    # Check sequence marker is correct
+    assert sequence == '30', "Wrong sequence marker."
+    signature_length, offset = ParseElement(hex_sig, offset, 2)
+    # Check the length of the remaining part matches the length of the signature + the length of the hashflag (1 byte)
+    assert len(hex_sig[offset:])/2 == int(signature_length, 16) + 1, "Wrong length."
+    # Get r
+    marker, offset = ParseElement(hex_sig, offset, 2)
+    assert marker == '02', "Wrong r marker."
+    len_r, offset = ParseElement(hex_sig, offset, 2)
+    len_r_int = int(len_r, 16) * 2   # Each byte represents 2 characters
+    r, offset = ParseElement(hex_sig, offset, len_r_int)
+    # Get s
+    marker, offset = ParseElement(hex_sig, offset, 2)
+    assert marker == '02', "Wrong s marker."
+    len_s, offset = ParseElement(hex_sig, offset, 2)
+    len_s_int = int(len_s, 16) * 2  # Each byte represents 2 characters
+    s, offset = ParseElement(hex_sig, offset, len_s_int)
+    # Get ht
+    ht, offset = ParseElement(hex_sig, offset, 2)
+    assert offset == len(hex_sig), "Wrong parsing."
+
+    return r, s, ht
 
