@@ -193,7 +193,8 @@ def ParseSignature(hex_sig):
     assert sequence == '30', "Wrong sequence marker."
     signature_length, offset = ParseElement(hex_sig, offset, 2)
     # Check the length of the remaining part matches the length of the signature + the length of the hashflag (1 byte)
-    assert len(hex_sig[offset:])/2 == int(signature_length, 16) + 1, "Wrong length."
+    #assert len(hex_sig[offset:])/2 == int(signature_length, 16) + 1, "Wrong length."
+    assert len(hex_sig[offset:])/2 == int(signature_length, 16) , "Wrong length."
     # Get r
     marker, offset = ParseElement(hex_sig, offset, 2)
     assert marker == '02', "Wrong r marker."
@@ -207,8 +208,9 @@ def ParseSignature(hex_sig):
     len_s_int = int(len_s, 16) * 2  # Each byte represents 2 characters
     s, offset = ParseElement(hex_sig, offset, len_s_int)
     # Get ht
-    ht, offset = ParseElement(hex_sig, offset, 2)
+    # ht, offset = ParseElement(hex_sig, offset, 2)
     assert offset == len(hex_sig), "Wrong parsing."
 
-    return r, s, ht
+    #return r, s, ht
+    return r, s
 

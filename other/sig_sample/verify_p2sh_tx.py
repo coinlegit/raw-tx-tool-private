@@ -190,21 +190,72 @@ def sigcheck(sig_b: bytes, pubkey_b: bytes, raw_txn_b: bytes):
         print('sigcheck: Bad Signature')
         return False
 
+def sigcheck2(sig_b: bytes, pubkey_b: bytes, raw_txn_256_b: bytes):
+    txn_sha256_b = raw_txn_256_b
+    prefix = pubkey_b[0:1]
+    #print('prefix = %s' % prefix)
+    #print('input pubkey = %s' % bytes.decode(binascii.hexlify(pubkey_b)))
+    if prefix == b'\x02' or prefix == b'\x03':
+        pubkey_b=binascii.hexlify(pubkey_b)
+        pubkey_b = GetUncompressedkey(pubkey_b)
+        uncompressed_key = hex(pubkey_b[0])[2:].zfill(64) + hex(pubkey_b[1])[2:].zfill(64)
+        #print (uncompressed_key)
+        pubkey_b=binascii.unhexlify(uncompressed_key)
+    elif prefix == b'\x04':
+        pubkey_b = pubkey_b[1:]
+    try:
+        #print("full public key = %s" % bytes.decode(binascii.hexlify(pubkey_b)))
+        vk = ecdsa.VerifyingKey.from_string(pubkey_b, curve=ecdsa.SECP256k1)
+        if vk.verify(sig_b, txn_sha256_b, hashlib.sha256) == True:
+            print('valid')
+            return True
+        else:
+            print('sigcheck2: invalid')
+            return False
+    except ecdsa.BadSignatureError:
+        print('sigcheck2: Bad Signature')
+        return False
 
 #sample1
-sig='ad0851c69dd756b45190b5a8e97cb4ac3c2b0fa2f2aae23aed6ca97ab33bf8830b248593abc1259512793e7dea61036c601775ebb23640a0120b0dba2c34b790'
+#sig='ad0851c69dd756b45190b5a8e97cb4ac3c2b0fa2f2aae23aed6ca97ab33bf8830b248593abc1259512793e7dea61036c601775ebb23640a0120b0dba2c34b790'
 #uncompressed pubkey
-pubkey='042f90074d7a5bf30c72cf3a8dfd1381bdbd30407010e878f3a11269d5f74a58788505cdca22ea6eab7cfb40dc0e07aba200424ab0d79122a653ad0c7ec9896bdf'
-raw_txn='0100000001c8cc2b56525e734ff63a13bc6ad06a9e5664df8c67632253a8e36017aee3ee4000000000455141042f90074d7a5bf30c72cf3a8dfd1381bdbd30407010e878f3a11269d5f74a58788505cdca22ea6eab7cfb40dc0e07aba200424ab0d79122a653ad0c7ec9896bdf51aefeffffff0120f40e00000000001976a9141d30342095961d951d306845ef98ac08474b36a088aca727040001000000'
+#pubkey='042f90074d7a5bf30c72cf3a8dfd1381bdbd30407010e878f3a11269d5f74a58788505cdca22ea6eab7cfb40dc0e07aba200424ab0d79122a653ad0c7ec9896bdf'
+#raw_txn='0100000001c8cc2b56525e734ff63a13bc6ad06a9e5664df8c67632253a8e36017aee3ee4000000000455141042f90074d7a5bf30c72cf3a8dfd1381bdbd30407010e878f3a11269d5f74a58788505cdca22ea6eab7cfb40dc0e07aba200424ab0d79122a653ad0c7ec9896bdf51aefeffffff0120f40e00000000001976a9141d30342095961d951d306845ef98ac08474b36a088aca727040001000000'
 
-sig_b=binascii.unhexlify(sig)
-pubkey_b=binascii.unhexlify(pubkey)
-raw_txn_b=binascii.unhexlify(raw_txn)
+#sig_b=binascii.unhexlify(sig)
+#pubkey_b=binascii.unhexlify(pubkey)
+#raw_txn_b=binascii.unhexlify(raw_txn)
 
-check=sigcheck(sig_b, pubkey_b, raw_txn_b)
-print (check)
+#check=sigcheck(sig_b, pubkey_b, raw_txn_b)
+#print (check)
 
-sig_r_s=ParseSignature('3045022100ad0851c69dd756b45190b5a8e97cb4ac3c2b0fa2f2aae23aed6ca97ab33bf88302200b248593abc1259512793e7dea61036c601775ebb23640a0120b0dba2c34b79001')
-print (sig_r_s)
-sig_r_s=ParseSignature('304402206878b5690514437a2342405029426cc2b25b4a03fc396fef845d656cf62bad2c022018610a8d37e3384245176ab49ddbdbe8da4133f661bf5ea7ad4e3d2b912d856f01')
+
+sig_b2='4bfa77725f598ccf358684d8fd2e752318554434e7cc4fd8563fba9d7e8048d0698d5872e3799da4d897289704cf23d3e4bff71a334104a2620676b0fc6378bc'
+#sig_b2=binascii.unhexlify('304402204bfa77725f598ccf358684d8fd2e752318554434e7cc4fd8563fba9d7e8048d00220698d5872e3799da4d897289704cf23d3e4bff71a334104a2620676b0fc6378bc')
+sig_b2=binascii.unhexlify(sig_b2)
+pubkey_b2=binascii.unhexlify('026225155bd431cbdd7e6d8ab07e61cd30482158b66fa11fe3c2492cd0a9dd2310')
+raw_tx_256_b=binascii.unhexlify('0a00903a1a547ea6c0cb20b1ef2e3926202f27c4dee9a656a57d8a6800ce67e3')
+check2=sigcheck2(sig_b2, pubkey_b2, raw_tx_256_b)
+print (check2)
+
+
+sig_b3='5a86c1fd5a778f593d42ddb827ce06b0e75a2439dcfccfa1b6c729026473699043e120efa879937622f5dd0d72d4d6e9285be09f8433878303d79461cbd0d8f0'
+sig_b3=binascii.unhexlify(sig_b3)
+pubkey_b3=binascii.unhexlify('026225155bd431cbdd7e6d8ab07e61cd30482158b66fa11fe3c2492cd0a9dd2310')
+#single hash256
+raw_tx_256_b3=binascii.unhexlify('7770f5acb9675a95f9314b29b8cc157dc7145f7df5bcd8131065c30eafd366bb')
+#double hash256
+#raw_tx_256_b3=binascii.unhexlify('fb1c8d5bfab446673a96f34b8440b194df51765e9653fe3458646fc862eeaaca')
+check3=sigcheck2(sig_b3, pubkey_b3, raw_tx_256_b3)
+print (check3)
+
+
+
+#sig_r_s=ParseSignature('3045022100ad0851c69dd756b45190b5a8e97cb4ac3c2b0fa2f2aae23aed6ca97ab33bf88302200b248593abc1259512793e7dea61036c601775ebb23640a0120b0dba2c34b79001')
+#print (sig_r_s)
+#sig_r_s=ParseSignature('304402206878b5690514437a2342405029426cc2b25b4a03fc396fef845d656cf62bad2c022018610a8d37e3384245176ab49ddbdbe8da4133f661bf5ea7ad4e3d2b912d856f01')
+#print (sig_r_s)
+#sig_r_s=ParseSignature('3045022100f739adc5b71bff4a168e82aab676fced416f758866313641d99a4a092b5b4cac02200e69bbc67470c4c817da06edd7509f3c841d2b5cd1cd267f5b1e8a1030cac00041')
+#print (sig_r_s)
+sig_r_s=ParseSignature('304402204bfa77725f598ccf358684d8fd2e752318554434e7cc4fd8563fba9d7e8048d00220698d5872e3799da4d897289704cf23d3e4bff71a334104a2620676b0fc6378bc')
 print (sig_r_s)
