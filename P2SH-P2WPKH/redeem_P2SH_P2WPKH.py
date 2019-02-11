@@ -106,7 +106,7 @@ p_len=hex(p_len).lstrip('0x')
 redeem_public_key=p_len+redeem_public_key
 witness_02='02'
 
-redeem_public_key_hash=script_code
+redeem_public_key_hash=scriptCode
 
 #print n_version
 #print segwit_marker
