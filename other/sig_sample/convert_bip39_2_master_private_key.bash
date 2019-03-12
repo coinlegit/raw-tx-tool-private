@@ -2,6 +2,9 @@
 #mnemonic to root seed 64 bytes
 #converting the BIP 39 mnemonic to a seed
 root_seed=$(echo "system guard object voyage slot hint embody faint embrace fresh tide diary" | bx mnemonic-to-seed -p "")
+root_seed=$(echo "まがる こんかい はぶらし たいめん やすたろう めんどう げんそう そとがわ びんぼう だむる めんせき きんかくじ" | bx mnemonic-to-seed --language ja)
+#master_seed 64 bytes
+echo ${root_seed}
 
 #master_priv_chain_code=$( echo ${root_seed} | bx base16-decode | hmac --algorithm sha512 --key "Bitcoin seed" -  )
 #master_priv_chain_code=$( echo ${root_seed} | bx base16-decode | openssl dgst -sha512 -hmac "secret_key" | awk '{print $2}' )
