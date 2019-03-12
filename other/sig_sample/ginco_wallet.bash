@@ -61,8 +61,8 @@ echo -n "m/44'/145'/0'#[xpub]':    " & echo ${master_seed}  | bx hd-private -d -
 #####################
 #publicAddress pairs. It generates the addresses as the nth external change address of 
 # the first account from that mnemonic this derivation path: m/44’/145’/0’/0/n
+#your ginco wallet address create by m/44'/145'/0'/0/0 path
 ######## xpub #########
-#m/44'/145'/0'/0/0
 for i in {0..1}
 do
     xpub=$( echo ${master_seed} | bx hd-private -d -i 44 | bx hd-private -d -i 145 | bx hd-private -d -i 0 | bx hd-private -i 0 | bx hd-private -i ${i} | bx hd-to-public )
