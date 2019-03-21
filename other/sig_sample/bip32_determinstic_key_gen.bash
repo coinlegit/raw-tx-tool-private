@@ -16,9 +16,8 @@ mnemonic=$( echo "${entropy}" | bx base16-encode | bx sha256 | cut -c 1-64 | bx 
 #3) make master seed from mnemonic with password
 #seed=$( echo ${mnemonic} | bx mnemonic-to-seed -p "Hello its me 123!" | bx hd-new -v 76066276 )
 #master_seed=$( echo ${mnemonic} | bx mnemonic-to-seed | bx hd-new -v 76066276 )   #mainet
-master_seed=$( echo ${mnemonic} | bx mnemonic-to-seed | bx hd-new -v 70615956 )   #testnet
-
-master_seed='tprv8ZgxMBicQKsPdtpxxFLx7ybP3dRhogjBRsuu3X3oNespPgsd9FgayEHRjD5HG7K6f4imWawZXtToCDNGouuqP41wg612Q3y2PQh7hnXkUPb'
+#master_seed=$( echo ${mnemonic} | bx mnemonic-to-seed | bx hd-new -v 70615956 )   #testnet
+master_seed='xprvA3eaDg64MwDr72PVGJ7CkvshNAzCDRz7rn98sYrZVAtDSWCAmNGQhEQeCLDcnmcpSkfjhHevXmu4ZL8ZcT9D4vEbG8LpiToZETrHZttw9Yw'
 
 echo 'master seed:      '"${master_seed}"
 
@@ -85,6 +84,7 @@ echo ${xpub} | bx hd-to-ec
 #M/44'/0'/1'/2/3 address
 #0,111
 echo ${xpub} | bx hd-to-ec | bx ec-to-address -v 111
+echo ${xpub} | bx hd-to-ec | bx ec-to-address -v 0
 
 #M/44'/0'/1'/2/3 wif key
 #version [01]
