@@ -1,9 +1,3 @@
-wif='cQS4N8Jbw9bmoWiVmprVEs5dEeJ6oUE2FxUo5VSvsDQSBfXakrVc'
-wif='cNbbGFfSG8xvrH4HXJLcoENEmtkDAvPoC21qVhjntUc18XBzhGGe'
-wif='cSNLj6xeg3Yg2rfcgKoWNx4MiAgn9ugCUUro37UDEhn6CzeYqjWW'
-wif='cT3tJP7BnjFJSAHbooMXrY8E9t2AFj37amSBAYFMeHfqPqPgD4ZA'
-wif='cSNLj6xeg3Yg2rfcgKoWNx4MiAgn9ugCUUro37UDEhn6CzeYqjWW'
-wif='cT3tJP7BnjFJSAHbooMXrY8E9t2AFj37amSBAYFMeHfqPqPgD4ZA'
 wif='5HpHagT65TZzG1PH3CSu63k8DbpvD8s5ip4nEB3kEsreCw2uZTA'
 #bx wif-to-ec L21LJEeJwK35wby1BeTjwWssrhrgQE2MZrpTm2zbMC677czAHHu3
 #ec=$(bx wif-to-ec $wif)
